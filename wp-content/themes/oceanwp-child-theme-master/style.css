@@ -16,7 +16,17 @@ Version: 1.0
     background-color:white;
     padding:6px 16px;
     border-radius:6px;
+    position: relative;
+    top: 24px;
 }
+
+
+footer .contact-btn {
+    top: -3px;
+    right: -33px;
+}
+
+
 .popup-overlay{
     position:fixed;
     width:100%;

@@ -42,14 +42,22 @@ class HMWP_Controllers_Connect extends HMWP_Classes_FrontController
 						HMWP_Classes_Tools::saveOptionsBackup();
 
 					} else {
-						HMWP_Classes_Error::setError( __( 'ERROR! Please make sure you use a valid token to connect the plugin with WPPlugins', 'hide-my-wp' ) . " <br /> " );
+						HMWP_Classes_Error::setNotification( __( 'ERROR! Please make sure you use a valid token to connect the plugin with WPPlugins', 'hide-my-wp' ) . " <br /> " );
 					}
 				} elseif ( $email <> '' ) {
 					HMWP_Classes_Tools::checkAccountApi( $email, $redirect_to );
 				} else {
-					HMWP_Classes_Error::setError( __( 'ERROR! Please make sure you use an email address to connect the plugin with WPPlugins', 'hide-my-wp' ) . " <br /> " );
+					HMWP_Classes_Error::setNotification( __( 'ERROR! Please make sure you use an email address to connect the plugin with WPPlugins', 'hide-my-wp' ) . " <br /> " );
 				}
 				break;
+            case 'hmwp_reconnect':
+                $redirect_to = HMWP_Classes_Tools::getSettingsUrl();
+
+                HMWP_Classes_Tools::saveOptions( 'hmwp_token', false);
+                HMWP_Classes_Tools::saveOptions( 'error', false );
+
+                wp_redirect( $redirect_to );
+                exit();
 			case 'hmwp_dont_connect':
 				$redirect_to = HMWP_Classes_Tools::getSettingsUrl();
 
@@ -61,6 +69,7 @@ class HMWP_Controllers_Connect extends HMWP_Classes_FrontController
 
 				wp_redirect( $redirect_to );
 				exit();
+
 		}
 
 

@@ -37,6 +37,7 @@ define('DB_COLLATE', '');
 define( 'DISALLOW_FILE_EDIT', true );
 
 define( 'COOKIEHASH', md5('admin-medit' . 'secure cookies' . 'admin-medit' ) );	// Cookies hardening
+// define( 'COOKIEHASH', md5($_SERVER['WORDPRESS_DB_PASSWORD'] . 'secure cookies' .$_SERVER['WORDPRESS_DB_PASSWORD'] ) );
 
 define( 'WP_MEMORY_LIMIT', '256M' );
 

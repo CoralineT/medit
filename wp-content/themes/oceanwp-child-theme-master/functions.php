@@ -34,9 +34,23 @@ add_action( 'wp_enqueue_scripts', 'oceanwp_child_enqueue_parent_style' );
 
 
 
- //function contact_btn( $items, $args ) {
- 	//$items .= '<a href="/contact" class="contact-btn">Nous contacter</a>';
- 	//return $items;
- //}
+// Ajout du bouton de contact dans la nav
+ function contact_btn( $items, $args ) {
+ 	$items .= '<a href="medit/contact" class="contact-btn">Nous contacter</a>';
+ 	return $items;
+ }
 
- //add_filter( 'wp_nav_menu_items', 'contact_btn', 10, 2 );
+ add_filter( 'wp_nav_menu_items', 'contact_btn', 10, 2 );
+
+
+ // Corriger erreur
+ /**
+ * Proper ob_end_flush() for all levels
+ *
+ * This replaces the WordPress `wp_ob_end_flush_all()` function
+ * with a replacement that doesn't cause PHP notices.
+ */
+remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
+add_action( 'shutdown', function() {
+   while ( @ob_end_flush() );
+} );
